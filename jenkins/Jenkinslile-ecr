@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+    environment {
+        Resource_Group = "rg-devops-cepstone"
+        APP_REPO_NAME = "ersinsari/petclinic-app-dev"
+        AWS_REGION = "northeurope"
+}
+    stages{
+        stage('Create ecr repo on AWS') {
+            steps {
+                sh 'az acr repository list --name ${APP_REPO_NAME} || \
+                az acr create \
+                --name ${APP_REPO_NAME} \
+                --resource-group ${Resource_Group}'
+            }
+        }
+    }
+}
