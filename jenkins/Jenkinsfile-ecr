@@ -11,8 +11,10 @@ pipeline {
                 sh 'az acr repository list --name ${APP_REPO_NAME} || \
                 az acr create \
                 --name ${APP_REPO_NAME} \
+                --sku Basic \
                 --resource-group ${Resource_Group}'
             }
+            
         }
     }
 }
