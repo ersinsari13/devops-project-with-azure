@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+    stages {
+        stage('Unittest') {
+            agent {
+                docker {
+                    image 'maven:3.8-openjdk-11'
+                    args '-v $HOME/.m2:/root/.m2 -v $(pwd):/app -w /app'
+                    reuseNode true
+                }
+            }
+            steps {
+                sh 'mvn clean test'
+            }
+        }
+    }
+
+    post {
+        always {
+            jacoco()
+        }
+    }
+}
