@@ -1,0 +1,10 @@
+pipeline {
+    agent any
+    stages {
+        stage('Unittest') {
+            steps {
+                sh 'docker container run alpine'
+            }
+        }
+    }
+}
