@@ -1,0 +1,2 @@
+$HOME=ersin
+echo $HOME
